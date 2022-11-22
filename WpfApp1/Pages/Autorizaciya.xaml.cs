@@ -41,8 +41,8 @@ namespace WpfApp1.Pages
 					case 2:  // администратор                    Логин: Admin      Пароль: 99M@skin
 						Class1.Mfrm.Navigate(new MainAdmin(UsersObject)); 
 						break;
-					case 1:  // пользователь                     Логин: Marina     Пароль: 3Ss!9ru#
-						Class1.Mfrm.Navigate(new MainUser(UsersObject));
+					case 1:  // пользователь                     Логин: Marina2     Пароль: 58@Hkimi
+                        Class1.Mfrm.Navigate(new MainUser(UsersObject));
 						break;
 					default:
 						break;

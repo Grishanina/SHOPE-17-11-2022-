@@ -27,10 +27,10 @@ namespace WpfApp1
         public Profile(T_Users user)
         {
             InitializeComponent();
-            this.user = user; 
-            tbName.Text = user.Name; 
-            tbSurname.Text = user.Surname;
-			tbPatronymic.Text = user.Patronymic;
+            this.user = user;
+			tbName.Text = user.Name + " " + user.Patronymic + " " + user.Surname;
+			tbBirthday.Text = Convert.ToString(user.Birthday);
+			tbPol.Text = user.T_Pol.Pol;
 			List<T_Userphoto> u = ClassBase.BD.T_Userphoto.Where(x => x.id_user == user.id_user).ToList();
 			if (u != null)
 			{
@@ -175,5 +175,12 @@ namespace WpfApp1
 			byte[] Bar = u[n].photoBinary;  
 			showImage(Bar, imUser);  
 		}
-	}
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+			WindowLoginPassword windowLoginPassword = new WindowLoginPassword(user);
+			windowLoginPassword.ShowDialog();
+			Class1.Mfrm.Navigate(new ProfileUser(user));
+		}
+    }
 }

@@ -35,7 +35,9 @@ namespace WpfApp1
             {
                 user.Login = tbLogin.Text;
                 user.Password = tbPassword.Password.GetHashCode();
+
                 ClassBase.BD.SaveChanges();
+                MessageBox.Show("Данные входа изменены");
                 this.Close();
             }
             else

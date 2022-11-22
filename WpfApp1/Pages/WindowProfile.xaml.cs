@@ -31,10 +31,17 @@ namespace WpfApp1
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
+			int g = 0;
+			if (rbMen.IsChecked == true) g = 1;
+			if (rbWomen.IsChecked == true) g = 2;
+
 			user.Name = tbName.Text;  
-			user.Surname = tbSurname.Text;  
-			tbPatronymic.Text = user.Patronymic;
-			ClassBase.BD.SaveChanges();  
+			user.Surname = tbSurname.Text;
+			user.Patronymic = tbPatronymic.Text;
+			user.Birthday = Convert.ToDateTime(tbBirthday.SelectedDate);
+			user.id_pol = g;
+			ClassBase.BD.SaveChanges();
+			MessageBox.Show("Личные данные изменены");
 			this.Close();  
 		}
 	}

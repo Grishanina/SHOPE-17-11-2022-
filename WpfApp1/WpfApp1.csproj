@@ -149,6 +149,7 @@
     <Compile Include="Pages\WindowLoginPassword.xaml.cs">
       <DependentUpon>WindowLoginPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Users_Class.cs" />
     <Page Include="Pages\CreateProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -17,9 +17,7 @@
                 <GroupBox Header="Пароль" Height="60" Width="250" Margin="0, 10, 0, 0">
                     <PasswordBox x:Name="pbpas" Height="26"></PasswordBox>
                 </GroupBox>
-                <Border>
                 <Button x:Name="Btn2" Margin="0, 50, 0, 0" Style="{StaticResource Auto}" Width="200" Height="40" Click="Btn2_Click">Авторизация</Button>
-                </Border>
                 <Button x:Name="Btn3" Margin="0, 20, 0, 0" Width="200" Height="40" Style="{StaticResource Reg}" Click="Btn3_Click">Регистрация</Button>
             </StackPanel>
         </GroupBox>
