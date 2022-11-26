@@ -17,15 +17,15 @@ namespace WpfApp1
 				switch (id_discount)
 				{
 					case 1: // 5%
-						return Brushes.Yellow;
+						return Brushes.YellowGreen;
 					case 2: // 10%
-						return Brushes.Yellow;
+						return Brushes.YellowGreen;
 					case 3: // 15%
-						return Brushes.Yellow;
+						return Brushes.YellowGreen;
 					case 4: // 25%
-						return Brushes.PaleGreen;
+						return Brushes.YellowGreen;
 					case 5: // 30%
-						return Brushes.PaleGreen;
+						return Brushes.YellowGreen;
 					case 6: // 50%
 						return Brushes.YellowGreen;
 					case 7: // 0% (нет скидки)

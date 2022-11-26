@@ -9,34 +9,58 @@
       Title="Product" Background="Pink">
 
     <Grid>
-        
-        <ListView Name="listProduct" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,10,0,0" Background="Pink">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel HorizontalAlignment="Center"></WrapPanel>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border Padding="5" CornerRadius="5" BorderThickness="1" Background="{Binding DiscountColor}" BorderBrush="Maroon">
-                        <Grid Name="gridProduct" Width="260" Height="240">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Title, StringFormat=Название: {0}}" FontWeight="DemiBold"/>
-                                <TextBlock Text="{Binding T_Type.Type, StringFormat=Тип: {0}}"/>
-                                <TextBlock Text="{Binding Manufact_Provider}" FontSize="12"/>
 
-                                <TextBlock Name="SostavPR" TextWrapping="Wrap" Uid="{Binding id_product}" FontSize="12" Loaded="SostavPR_Loaded"/>
 
-                                <TextBlock Name="DiscountPT" TextWrapping="Wrap" Uid="{Binding id_product}" Loaded="DiscountPT_Loaded"/>
-                                <TextBlock Name="PricePT" TextWrapping="Wrap" Uid="{Binding id_product}"  Loaded="PricePT_Loaded"/>
-                                <Button Uid="{Binding id_product}" Height="30" Width="140" Content="Редактировать" Name="btnupdate" Click="btnupdate_Click"></Button>
-                                <Button Uid="{Binding id_product}" Height="30" Margin="0" Width="140" Content="Удалить" Click="Button_Click"></Button>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <StackPanel>
+            <StackPanel>
+                <GroupBox Header="Поиск" Margin="20,10,20,0">
+                    <TextBox Name="tbSearch" TextChanged="tbSearch_TextChanged" Height="30" FontSize="16"></TextBox>
+                </GroupBox>
+                <StackPanel Orientation="Horizontal">
+                    <GroupBox Header="Сортировка по типу товара" Margin="20, 0, 20 ,0" >
+                        <ComboBox Name="cmbType" SelectionChanged="cmbType_SelectionChanged" Width="250" ></ComboBox>
+                    </GroupBox>
+                    <GroupBox Header="Сортировка по цене товара" Margin="20, 0, 20 ,0" >
+                        <ComboBox Name="cmbSort" SelectionChanged="cmbType_SelectionChanged" Width="250" >
+                            <ComboBoxItem>Без сортировки</ComboBoxItem>
+                            <ComboBoxItem>По MIN</ComboBoxItem>
+                            <ComboBoxItem>По MAX</ComboBoxItem>
+                        </ComboBox>
+                    </GroupBox>
+                    <CheckBox Name="cbPhoto" Checked="cbPhoto_Checked" Unchecked="cbPhoto_Checked" Margin="20, 20, 20 , 20" FontWeight="DemiBold">Со скидкой</CheckBox>
+                </StackPanel>
+                <TextBlock Name="tbCount" Margin="20, 10, 20, 0" HorizontalAlignment="Center"></TextBlock>
+                <Button HorizontalAlignment="Left" Margin="5, 10, 0, 0" Height="34" Width="40" VerticalAlignment="Top" Name="btnCreateProduct" Click="btnCreateProduct_Click" Padding="0, 0, 0, 5" FontWeight="Bold">+</Button>
+            </StackPanel>
+
+            
+            <ListView Name="listProduct" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,10,0,0" Background="Pink">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="5" CornerRadius="5" BorderThickness="1" Background="{Binding DiscountColor}" BorderBrush="Maroon">
+                            <Grid Name="gridProduct" Width="260" Height="240">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title, StringFormat=Название: {0}}" FontWeight="DemiBold"/>
+                                    <TextBlock Text="{Binding T_Type.Type, StringFormat=Тип: {0}}"/>
+                                    <TextBlock Text="{Binding Manufact_Provider}" FontSize="12"/>
+
+                                    <TextBlock Name="SostavPR" TextWrapping="Wrap" Uid="{Binding id_product}" FontSize="12" Loaded="SostavPR_Loaded"/>
+
+                                    <TextBlock Name="DiscountPT" TextWrapping="Wrap" Uid="{Binding id_product}" Loaded="DiscountPT_Loaded"/>
+                                    <TextBlock Name="PricePT" TextWrapping="Wrap" Uid="{Binding id_product}"  Loaded="PricePT_Loaded"/>
+                                    <Button Uid="{Binding id_product}" Height="30" Width="140" Content="Редактировать" Name="btnupdate" Click="btnupdate_Click"></Button>
+                                    <Button Uid="{Binding id_product}" Height="30" Margin="0" Width="140" Content="Удалить" Click="Button_Click"></Button>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
-        <Button HorizontalAlignment="Left" Margin="5, 15, 0, 0" Height="34" Width="40" VerticalAlignment="Top" Name="btnCreateProduct" Click="btnCreateProduct_Click" Padding="0, 0, 0, 5" FontWeight="Bold">+</Button>
+        </StackPanel>
     </Grid>
 </Page>

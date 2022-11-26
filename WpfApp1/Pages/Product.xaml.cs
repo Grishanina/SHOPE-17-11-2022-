@@ -25,6 +25,21 @@ namespace WpfApp1
         {
             InitializeComponent();
             listProduct.ItemsSource = ClassBase.BD.T_Product.ToList();
+
+            List<T_Type> TT = ClassBase.BD.T_Type.ToList();
+
+            // программное заполнение выпадающего списка
+            cmbType.Items.Add("Все типы товаров");  // первый элемент выпадающего списка, который сбрасывает фильтрацию
+            for (int i = 0; i < TT.Count; i++)  // цикл для записи в выпадающий список всех пород котов из БД
+            {
+                cmbType.Items.Add(TT[i].Type);
+            }
+
+            cmbType.SelectedIndex = 0;  // выбранное по умолчанию значение в списке с породами котов ("Все породы")
+            cmbSort.SelectedIndex = 0;  // выбранное по умолчанию значение в списке с видами сортировки ("Без сортировки")
+
+            tbCount.Text = "По данным запросам найдено количество записей: " + ClassBase.BD.T_Product.ToList().Count;
+
         }
 
 
@@ -116,5 +131,77 @@ namespace WpfApp1
 
 			Class1.Mfrm.Navigate(new Product());
 		}
+
+        void Filter()  // метод для одновременной фильтрации, поиска и сортировки
+        {
+            List<T_Product> productList = new List<T_Product>();  // пустой список, который далее будет заполнять элементами, удавлетворяющими условиям фильтрации, поиска и сортировки
+
+            string type = cmbType.SelectedValue.ToString();  // выбранное пользователем название типа
+            int index = cmbType.SelectedIndex;
+
+            // поиск значений, удовлетворяющих условия фильтра
+            if (index != 0)
+            {
+                productList = ClassBase.BD.T_Product.Where(x => x.T_Type.Type == type).ToList();
+            }
+            else  // если выбран пункт "Все типы товаров", то сбрасываем фильтрацию:
+            {
+                productList = ClassBase.BD.T_Product.ToList();
+            }
+
+
+            // поиск совпадений по названию продукта
+            if (!string.IsNullOrWhiteSpace(tbSearch.Text))  // если строка не пустая и если она не состоит из пробелов
+            {
+                productList = productList.Where(x => x.Title.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            }
+
+
+            // выбор элементов только со скидкой
+            if (cbPhoto.IsChecked == true)
+            {
+                productList = productList.Where(x => x.T_Discount.Discount != 0).ToList();
+            }
+
+            // сортировка
+            switch (cmbSort.SelectedIndex)
+            {
+                case 1:
+                    {
+                        productList.Sort((x, y) => x.Price.CompareTo(y.Price));
+                    }
+                    break;
+                case 2:
+                    {
+                        productList.Sort((x, y) => x.Price.CompareTo(y.Price));
+                        productList.Reverse();
+                    }
+                    break;
+            }
+
+            listProduct.ItemsSource = productList;
+            if (productList.Count == 0)
+            {
+                MessageBox.Show("нет записей");
+            }
+            tbCount.Text = "По данным запросам найдено количество записей: " + productList.Count;
+        }
+
+        // далее во всех обработчиках событий применяем один и тот же метод Filter, который позволяет находить условия, удовлетворяющие всем сразу выбранным параметрам
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbPhoto_Checked(object sender, RoutedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cmbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
     }
 }
